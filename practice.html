@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Practice</title>
+	<script type="text/javascript">
+		var isLeapYear = false;
+		function leapYear(){
+			var yearNumber = Number(year.value);
+			if((yearNumber % 400 === 0 ) || ((yearNumber % 4 === 0 ) && (yearNumber % 100 !== 0 ))){
+				isLeapYear = true;
+				return console.log("leapYear");
+			}
+			else{
+				return console.log("original");
+			}
+		}
+
+		function showdayofMonth(){
+			var day31 = document.createElement("option");
+			day31.text = "31";
+			day31.value = "31";
+
+			var day30 = document.createElement("option");
+			day30.text = "30";
+			day30.value = "30";
+
+			var day29 = document.createElement("option");
+			day29.text = "29";
+			day29.value = "29";
+
+			var parent = document.getElementById("day");
+
+			console.log("select month is " + month.value);
+			switch(month.value){
+				case "1":
+				case "3":
+				case "5":
+				case "7":
+				case "8":
+				case "10":
+				case "12":
+					
+					if(document.querySelector("#day option[value='31']") == null){
+						if(document.querySelector("#day option[value='30']") == null){
+							if(document.querySelector("#day option[value='29']") == null){
+								parent.appendChild(day29);
+							}
+							parent.appendChild(day30);
+						}
+						parent.appendChild(day31);
+					}
+
+					break;
+				case "4":
+				case "6":
+				case "9":
+				case "11":
+					if(document.querySelector("#day option[value='31']")){
+						var parent = document.getElementById("day");
+						var day31 = parent.lastElementChild;
+						return parent.removeChild(day31);
+					}
+
+					if(document.querySelector("#day option[value='30']") == null){
+						if(document.querySelector("#day option[value='29']") == null){
+							parent.appendChild(day29);
+						}
+						parent.appendChild(day30);
+					}
+					break;
+
+
+				case "2":
+					if(document.querySelector("#day option[value='30']")){
+						if(document.querySelector("#day option[value='31']")){
+							var deletedday31 = parent.lastElementChild;
+							parent.removeChild(deletedday31);
+						}
+						var deletedday30 = parent.lastElementChild;
+						parent.removeChild(deletedday30);
+
+						if(!leapYear){
+							var deletedday29 = parent.lastElementChild;
+							parent.removeChild(deletedday29);
+						}
+					}
+					break;
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<h1>Register</h1>
+	<form>
+		<label for="firstname">First Name:</label>
+		<input type="text" id="firstname" name="firstname" placeholder="John" required>
+		<label for="lastname">Last Name:</label>
+		<input type="text" id="lastname" name="lastname" placeholder="Smith" required>
+
+		<div>
+			<label for="male">Male</label>
+			<input type="radio" id="male" name="gender" value="male" >
+			<label for="female">Female</label>
+			<input type="radio" id="female" name="gender" value="female">
+			<label for="other">Other</label>
+			<input type="radio" id="other" name="gender" value="other">
+		</div>
+
+		<div>
+			<label for="email">Email:
+				<input type="email" id="email" name="email" placeholder="your email"  required>
+			</label>	
+			<label for="pw">Password:
+				<input type="Password" id="pw" name="password" placeholder="your password" pattern=".{5,10}" required title="5 to 10 characters">
+			</label>
+		</div>
+		<div>
+			<label>Birthday:</label>
+			<select id="year" onchange="leapYear()" name="year">
+				<option value="">Year</option>
+				<option value="2016">2016</option>
+				<option value="2015">2015</option>
+				<option value="2014">2014</option>
+				<option value="2013">2013</option>
+				<option value="2012">2012</option>
+				<option value="2011">2011</option>
+			</select>
+			<select id="month" onchange="showdayofMonth()" name="month">
+				<option value="">Month</option>
+				<option value="1">Jan</option>
+				<option value="2">Feb</option>
+				<option value="3">March</option>
+				<option value="4">April</option>
+				<option value="5">May</option>
+				<option value="6">Jun</option>
+				<option value="7">Jul</option>
+				<option value="8">August</option>
+				<option value="9">Sep</option>
+				<option value="10">Oct</option>
+				<option value="11">Nov</option>
+				<option value="12">Dec</option>
+			</select>
+			<select id="day" name="year">
+				<option>Day</option>
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+				<option value="6">6</option>
+				<option value="7">7</option>
+				<option value="8">8</option>
+				<option value="9">9</option>
+				<option value="10">10</option>
+				<option value="11">11</option>
+				<option value="12">12</option>
+				<option value="13">13</option>
+				<option value="14">14</option>
+				<option value="15">15</option>
+				<option value="16">16</option>
+				<option value="17">17</option>
+				<option value="18">18</option>
+				<option value="19">19</option>
+				<option value="20">20</option>
+				<option value="21">21</option>
+				<option value="22">22</option>
+				<option value="23">23</option>
+				<option value="24">24</option>
+				<option value="25">25</option>
+				<option value="26">26</option>
+				<option value="27">27</option>
+				<option value="28">28</option>
+				<option value="29">29</option>
+				<option value="30">30</option>
+			</select>		
+		</div>
+		<label for="agree">I agree to te terms and conditions</label>
+			<input type="checkbox" name="" id="agree">
+		<div>
+			<button>Submit</button>
+			<input type="date" name="">
+		</div>
+		
+	</form>
+</body>
+</html>
